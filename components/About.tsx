@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const features = [
   { icon: "🌿", label: "Open Garden Dining" },
@@ -10,12 +11,75 @@ const features = [
   { icon: "🌄", label: "Mountain Views" },
 ];
 
+const occasions = [
+  {
+    id: "birthday",
+    label: "Birthdays",
+    icon: "🎂",
+    image: "/images/customer_birthday1.jpg",
+    tagline: "Make it unforgettable",
+    desc: "Celebrate life's big moments surrounded by nature. Our lush garden sets the perfect stage for birthday parties of every size.",
+  },
+  {
+    id: "family",
+    label: "Family Gatherings",
+    icon: "👨‍👩‍👧‍👦",
+    image: "/images/customer_family1.jpg",
+    tagline: "Together under the trees",
+    desc: "A peaceful retreat for the whole family. Spacious seating, kid-friendly ambiance, and a menu that pleases everyone.",
+  },
+  {
+    id: "couple",
+    label: "Romantic Evenings",
+    icon: "💑",
+    image: "/images/customer_couple.jpg",
+    tagline: "Romance in bloom",
+    desc: "Candle-lit tables, soft music, and garden breezes — the perfect atmosphere for a date night or anniversary dinner.",
+  },
+  {
+    id: "events",
+    label: "Celebrations & Events",
+    icon: "🥂",
+    image: "/images/customer_spray1.jpg",
+    tagline: "Pop the champagne",
+    desc: "From promotions to milestones, our venue accommodates private events with custom menus and full-service hospitality.",
+  },
+];
+
 export default function About() {
+  const [active, setActive] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const goTo = (idx: number) => {
+    if (idx === active || animating) return;
+    setAnimating(true);
+    setTimeout(() => {
+      setActive(idx);
+      setAnimating(false);
+    }, 350);
+  };
+
+  // Auto-cycle every 4 s
+  useEffect(() => {
+    timerRef.current = setInterval(() => {
+      setAnimating(true);
+      setTimeout(() => {
+        setActive((prev) => (prev + 1) % occasions.length);
+        setAnimating(false);
+      }, 350);
+    }, 4000);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
+
+  const current = occasions[active];
+
   return (
-    <section
-      id="about"
-      style={{ padding: "6rem 1.5rem", maxWidth: "1200px", margin: "0 auto" }}
-    >
+    <section id="about" style={{ padding: "6rem 1.5rem", maxWidth: "1200px", margin: "0 auto" }}>
+
+      {/* ── Top grid: story text + image ── */}
       <div
         style={{
           display: "grid",
@@ -23,6 +87,7 @@ export default function About() {
           gap: "4rem",
           alignItems: "center",
         }}
+        className="about-grid"
       >
         {/* Left: Text */}
         <div>
@@ -89,7 +154,6 @@ export default function About() {
 
         {/* Right: Image */}
         <div style={{ position: "relative" }}>
-          {/* Decorative box offset */}
           <div
             style={{
               position: "absolute",
@@ -152,6 +216,108 @@ export default function About() {
               >
                 Top Rated in Kathmandu
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Occasions Spotlight ── */}
+      <div style={{ marginTop: "6rem" }}>
+        {/* Section header */}
+        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+          <p className="section-subtitle">Perfect For Every Occasion</p>
+          <h2 className="section-title" style={{ marginTop: "0.25rem" }}>
+            Your Moments,{" "}
+            <span style={{ fontStyle: "italic", fontWeight: 400 }}>Our Setting</span>
+          </h2>
+          <div
+            className="divider-ornament"
+            style={{ marginTop: "1.25rem", maxWidth: "320px", margin: "1.25rem auto 0" }}
+          >
+            <span style={{ fontSize: "1rem" }}>✦</span>
+          </div>
+        </div>
+
+        {/* Spotlight card */}
+        <div className="occasion-spotlight">
+          {/* Tabs */}
+          <div className="occasion-tabs">
+            {occasions.map((occ, i) => (
+              <button
+                key={occ.id}
+                id={`occasion-tab-${occ.id}`}
+                className={`occasion-tab${active === i ? " active" : ""}`}
+                onClick={() => {
+                  if (timerRef.current) clearInterval(timerRef.current);
+                  goTo(i);
+                  // restart auto-cycle
+                  timerRef.current = setInterval(() => {
+                    setAnimating(true);
+                    setTimeout(() => {
+                      setActive((prev) => (prev + 1) % occasions.length);
+                      setAnimating(false);
+                    }, 350);
+                  }, 4000);
+                }}
+              >
+                <span className="occasion-tab-icon">{occ.icon}</span>
+                <span className="occasion-tab-label">{occ.label}</span>
+                {active === i && <span className="occasion-tab-bar" />}
+              </button>
+            ))}
+          </div>
+
+          {/* Content */}
+          <div className={`occasion-content${animating ? " fading" : ""}`}>
+            {/* Image */}
+            <div className="occasion-image-wrap">
+              <Image
+                src={current.image}
+                alt={current.label}
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 768px) 100vw, 55vw"
+                priority={active === 0}
+              />
+              {/* Gradient overlay */}
+              <div className="occasion-image-overlay" />
+              {/* Icon badge */}
+              <div className="occasion-icon-badge">
+                <span style={{ fontSize: "2rem" }}>{current.icon}</span>
+              </div>
+              {/* Progress bar */}
+              <div className="occasion-progress-bar">
+                <div
+                  key={active}
+                  className="occasion-progress-fill"
+                />
+              </div>
+            </div>
+
+            {/* Text panel */}
+            <div className="occasion-text-panel">
+              <p className="occasion-eyebrow">{current.icon} {current.label}</p>
+              <h3 className="occasion-tagline">{current.tagline}</h3>
+              <p className="occasion-desc">{current.desc}</p>
+
+              {/* Dot indicators */}
+              <div className="occasion-dots">
+                {occasions.map((_, i) => (
+                  <button
+                    key={i}
+                    aria-label={`Go to ${occasions[i].label}`}
+                    className={`occasion-dot${active === i ? " active" : ""}`}
+                    onClick={() => {
+                      if (timerRef.current) clearInterval(timerRef.current);
+                      goTo(i);
+                    }}
+                  />
+                ))}
+              </div>
+
+              <a href="#booking" className="btn-gold" style={{ marginTop: "2rem", display: "inline-flex" }}>
+                🌿 Book for This Occasion
+              </a>
             </div>
           </div>
         </div>

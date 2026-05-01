@@ -18,11 +18,14 @@ export default function Hero() {
     >
       {/* Background photo */}
       <Image
-        src="/hero.png"
+        // src="/hero.png"
+        // src="/images/building.jpg"
+        src="/images/teej.jpg"
         alt="Green Yard Restaurant outdoor garden"
         fill
         priority
         style={{ objectFit: "cover", objectPosition: "center" }}
+        className="zoom-out"
       />
 
       {/* Dark gradient overlay */}

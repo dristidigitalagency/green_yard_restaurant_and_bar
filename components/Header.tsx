@@ -149,8 +149,13 @@ export default function Header() {
             (e.currentTarget as HTMLElement).style.boxShadow =
               "0 4px 16px rgba(201,168,76,0.4)";
           }}
+          className="cta"
         >
-          Book Table
+          <span className=" hidden sm:block ">Book Table</span>
+          <span className="sm:hidden ">
+            <div>Book</div>
+            <div>Table</div>
+          </span>
         </a>
       </header>
 
