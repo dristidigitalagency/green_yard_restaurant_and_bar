@@ -276,7 +276,7 @@ export default function Header() {
           }}
         >
           <div>📍 Kathmandu, Nepal</div>
-          <div>📞 +977 9800000000</div>
+          <div>📞 +977 9764595174</div>
         </div>
       </nav>
     </>

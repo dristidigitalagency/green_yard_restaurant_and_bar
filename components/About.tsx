@@ -175,7 +175,7 @@ export default function About() {
             }}
           >
             <Image
-              src="/hero.png"
+              src="/images/building.jpg"
               alt="Green Yard garden restaurant interior"
               fill
               style={{ objectFit: "cover" }}
