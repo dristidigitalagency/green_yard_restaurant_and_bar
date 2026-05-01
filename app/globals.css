@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 
 /* â”€â”€â”€ Design Tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -790,25 +790,34 @@ h4 {
   overflow: hidden;
   box-shadow: 0 24px 80px rgba(0,0,0,0.5);
   border: 1px solid rgba(82,183,136,0.15);
-  transition: opacity 0.28s ease, transform 0.28s ease;
 }
 
-/* Phase transitions */
-.menu-spotlight.phase-exit {
-  opacity: 0;
-  transform: scale(0.97) translateY(8px);
+/* -- Plate slide animations -- */
+@keyframes plateExitLeft {
+  from { transform: translateX(0)     scale(1);    opacity: 1; }
+  to   { transform: translateX(-110%) scale(0.82); opacity: 0; }
+}
+@keyframes plateExitRight {
+  from { transform: translateX(0)    scale(1);    opacity: 1; }
+  to   { transform: translateX(110%) scale(0.82); opacity: 0; }
+}
+@keyframes plateEnter {
+  from { transform: translateX(80%)  scale(0.88); opacity: 0; }
+  to   { transform: translateX(0)    scale(1);    opacity: 1; }
 }
 
-.menu-spotlight.phase-enter {
-  animation: spotEnter 0.42s cubic-bezier(0.2, 0, 0.2, 1) forwards;
-}
+.menu-plate-circle.slide-exit-left  { animation: plateExitLeft  0.28s ease-in  forwards; }
+.menu-plate-circle.slide-exit-right { animation: plateExitRight 0.28s ease-in  forwards; }
+.menu-plate-circle.slide-enter      { animation: plateEnter     0.32s cubic-bezier(0.2,0,0.2,1) forwards; }
 
-@keyframes spotEnter {
-  from { opacity: 0; transform: scale(0.97) translateY(-8px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+/* -- Info panel fade-up on new item -- */
+@keyframes infoFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-.menu-spotlight.phase-idle { opacity: 1; transform: none; }
+.menu-info-fadein {
+  animation: infoFadeUp 0.35s cubic-bezier(0.2,0,0.2,1) forwards;
+}
 
 /* Plate side */
 .menu-plate-side {

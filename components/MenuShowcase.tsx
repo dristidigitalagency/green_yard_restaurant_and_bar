@@ -112,43 +112,47 @@ const tagColors: Record<string, string> = {
   "Local Fav":   "#c0392b",
 };
 
-type Phase = "idle" | "exit" | "enter";
+type SlideDir = "left" | "right" | null;
 
 export default function MenuShowcase() {
   const [catIdx, setCatIdx]   = useState(0);
   const [itemIdx, setItemIdx] = useState(0);
-  const [phase, setPhase]     = useState<Phase>("idle");
-  const timerRef              = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [slideDir, setSlideDir] = useState<SlideDir>(null);
+  const [animKey, setAnimKey] = useState(0);   // bumped to force re-key on plate + text
+  const busyRef = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const cat  = categories[catIdx];
   const dish = cat.items[itemIdx];
 
-  const transition = useCallback((nextCat: number, nextItem: number) => {
-    if (phase !== "idle") return;
-    setPhase("exit");
+  const go = useCallback((nextCat: number, nextItem: number, dir: SlideDir) => {
+    if (busyRef.current) return;
+    busyRef.current = true;
+    setSlideDir(dir);           // plate slides out this direction
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
       setCatIdx(nextCat);
       setItemIdx(nextItem);
-      setPhase("enter");
-      timerRef.current = setTimeout(() => setPhase("idle"), 420);
-    }, 280);
-  }, [phase]);
+      setSlideDir(null);        // plate slides in from opposite
+      setAnimKey(k => k + 1);  // re-key text → fade-up
+      busyRef.current = false;
+    }, 300);
+  }, []);
 
   const navigate = useCallback((dir: "prev" | "next") => {
     const len = cat.items.length;
     const next = dir === "next"
       ? (itemIdx + 1) % len
       : (itemIdx - 1 + len) % len;
-    transition(catIdx, next);
-  }, [cat.items.length, catIdx, itemIdx, transition]);
+    go(catIdx, next, dir === "next" ? "left" : "right");
+  }, [cat.items.length, catIdx, itemIdx, go]);
 
   const switchCategory = (idx: number) => {
-    if (idx !== catIdx) transition(idx, 0);
+    if (idx !== catIdx) go(idx, 0, "left");
   };
 
   const pickItem = (i: number) => {
-    if (i !== itemIdx) transition(catIdx, i);
+    if (i !== itemIdx) go(catIdx, i, i > itemIdx ? "left" : "right");
   };
 
   return (
@@ -182,12 +186,20 @@ export default function MenuShowcase() {
         </div>
 
         {/* Spotlight card */}
-        <div className={`menu-spotlight phase-${phase}`}>
+        <div className="menu-spotlight">
 
           {/* Left: Plate */}
           <div className="menu-plate-side">
             <div className="menu-glow-ring" />
-            <div className="menu-plate-circle">
+            {/* key changes on every nav → triggers CSS slide animation */}
+            <div
+              key={`plate-${catIdx}-${itemIdx}`}
+              className={`menu-plate-circle${
+                slideDir === "left"  ? " slide-exit-left"  :
+                slideDir === "right" ? " slide-exit-right" :
+                " slide-enter"
+              }`}
+            >
               <Image
                 src={p(dish.plate - 1)}
                 alt={dish.name}
@@ -204,7 +216,8 @@ export default function MenuShowcase() {
           </div>
 
           {/* Right: Info */}
-          <div className="menu-info-side">
+          {/* animKey changes on every nav → text fades up */}
+          <div key={animKey} className="menu-info-side menu-info-fadein">
             {dish.tag && (
               <span
                 className="menu-tag-badge"
@@ -227,7 +240,7 @@ export default function MenuShowcase() {
                 aria-label="Previous dish"
                 className="menu-nav-btn"
                 onClick={() => navigate("prev")}
-                disabled={phase !== "idle"}
+                disabled={slideDir !== null}
               >←</button>
 
               <div className="menu-pip-row">
@@ -246,7 +259,7 @@ export default function MenuShowcase() {
                 aria-label="Next dish"
                 className="menu-nav-btn filled"
                 onClick={() => navigate("next")}
-                disabled={phase !== "idle"}
+                disabled={slideDir !== null}
               >→</button>
             </div>
 
