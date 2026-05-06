@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -228,7 +229,7 @@ export default function Footer() {
               color: "rgba(183,228,199,0.45)",
             }}
           >
-            🌿 Crafted with love in Kathmandu
+            🌿 Crafted with love by <a className="text-green-300" href="https://dristidigitalagency.web.app"> Dristi Digital Agency</a> in Kathmandu
           </p>
         </div>
       </div>

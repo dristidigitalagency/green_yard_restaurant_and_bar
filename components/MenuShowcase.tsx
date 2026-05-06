@@ -192,21 +192,23 @@ export default function MenuShowcase() {
           <div className="menu-plate-side">
             <div className="menu-glow-ring" />
             {/* key changes on every nav → triggers CSS slide animation */}
-            <div
-              key={`plate-${catIdx}-${itemIdx}`}
-              className={`menu-plate-circle${slideDir === "left" ? " slide-exit-left" :
-                slideDir === "right" ? " slide-exit-right" :
-                  " slide-enter"
-                }`}
-            >
-              <Image
-                src={p(dish.plate - 1)}
-                alt={dish.name}
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="300px"
-                priority={catIdx === 0 && itemIdx === 0}
-              />
+            <div className='menu-plate-circle'>
+              <div
+                key={`plate-${catIdx}-${itemIdx}`}
+                className={`menu-plate-circle${slideDir === "left" ? " slide-exit-left" :
+                  slideDir === "right" ? " slide-exit-right" :
+                    " slide-enter"
+                  }`}
+              >
+                <Image
+                  src={p(dish.plate - 1)}
+                  alt={dish.name}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="300px"
+                  priority={catIdx === 0 && itemIdx === 0}
+                />
+              </div>
             </div>
             <div className="menu-item-counter">
               {String(itemIdx + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(cat.items.length).padStart(2, "0")}
