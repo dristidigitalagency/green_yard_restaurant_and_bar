@@ -1,13 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Menu", href: "#menu" },
-  { label: "Occasions", href: "#occasions" },
-  { label: "Book a Table", href: "#booking" },
-  { label: "Find Us", href: "#footer" },
+  { label: "About", href: "/#about" },
+  { label: "Menu", href: "/#menu" },
+  { label: "Occasions", href: "/#occasions" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Photo Shoots", href: "/photo-shoot" },
+  { label: "Book a Table", href: "/#booking" },
+  { label: "Find Us", href: "/#footer" },
 ];
 
 export default function Header() {
@@ -79,8 +82,8 @@ export default function Header() {
         </button>
 
         {/* Logo (center) */}
-        <a
-          href="#hero"
+        <Link
+          href="/"
           style={{
             position: "absolute",
             left: "50%",
@@ -118,11 +121,11 @@ export default function Header() {
               </div>
             </div>
           </div>
-        </a>
+        </Link>
 
         {/* Book CTA (right) */}
-        <a
-          href="#booking"
+        <Link
+          href="/#booking"
           id="header-book-btn"
           style={{
             padding: "0.5rem 1.25rem",
@@ -156,7 +159,7 @@ export default function Header() {
             <div>Book</div>
             <div>Table</div>
           </span>
-        </a>
+        </Link>
       </header>
 
       {/* Mobile Drawer Overlay */}
@@ -218,7 +221,7 @@ export default function Header() {
 
         {/* Nav links */}
         {navLinks.map((l) => (
-          <a
+          <Link
             key={l.label}
             href={l.href}
             onClick={close}
@@ -230,6 +233,7 @@ export default function Header() {
               padding: "0.65rem 0",
               borderBottom: "1px solid rgba(82,183,136,0.15)",
               transition: "color 0.2s,padding-left 0.2s",
+              display: "block",
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.color = "#b7e4c7";
@@ -242,7 +246,7 @@ export default function Header() {
             }}
           >
             {l.label}
-          </a>
+          </Link>
         ))}
 
         {/* Close button */}

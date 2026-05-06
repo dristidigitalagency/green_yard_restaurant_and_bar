@@ -1,5 +1,6 @@
 "use client";
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -86,12 +87,14 @@ export default function Footer() {
               Quick Links
             </h4>
             {[
-              { label: "About Us", href: "#about" },
-              { label: "Our Menu", href: "#menu" },
-              { label: "Occasions", href: "#occasions" },
-              { label: "Book a Table", href: "#booking" },
+              { label: "About Us", href: "/#about" },
+              { label: "Our Menu", href: "/#menu" },
+              { label: "Occasions", href: "/#occasions" },
+              { label: "Gallery", href: "/gallery" },
+              { label: "Photo Shoots", href: "/photo-shoot" },
+              { label: "Book a Table", href: "/#booking" },
             ].map((l) => (
-              <a
+              <Link
                 key={l.label}
                 href={l.href}
                 style={{
@@ -107,7 +110,7 @@ export default function Footer() {
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(183,228,199,0.75)")}
               >
                 → {l.label}
-              </a>
+              </Link>
             ))}
           </div>
 
