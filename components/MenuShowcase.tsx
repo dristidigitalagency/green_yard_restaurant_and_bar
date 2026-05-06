@@ -104,25 +104,25 @@ const categories: Category[] = [
 ];
 
 const tagColors: Record<string, string> = {
-  "Best Value":  "#c9a84c",
-  "Popular":     "#52b788",
+  "Best Value": "#c9a84c",
+  "Popular": "#52b788",
   "Chef's Pick": "#2d6a4f",
-  "Must Try":    "#8b6345",
-  "Signature":   "#a07830",
-  "Local Fav":   "#c0392b",
+  "Must Try": "#8b6345",
+  "Signature": "#a07830",
+  "Local Fav": "#c0392b",
 };
 
 type SlideDir = "left" | "right" | null;
 
 export default function MenuShowcase() {
-  const [catIdx, setCatIdx]   = useState(0);
+  const [catIdx, setCatIdx] = useState(0);
   const [itemIdx, setItemIdx] = useState(0);
   const [slideDir, setSlideDir] = useState<SlideDir>(null);
   const [animKey, setAnimKey] = useState(0);   // bumped to force re-key on plate + text
   const busyRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const cat  = categories[catIdx];
+  const cat = categories[catIdx];
   const dish = cat.items[itemIdx];
 
   const go = useCallback((nextCat: number, nextItem: number, dir: SlideDir) => {
@@ -194,11 +194,10 @@ export default function MenuShowcase() {
             {/* key changes on every nav → triggers CSS slide animation */}
             <div
               key={`plate-${catIdx}-${itemIdx}`}
-              className={`menu-plate-circle${
-                slideDir === "left"  ? " slide-exit-left"  :
+              className={`menu-plate-circle${slideDir === "left" ? " slide-exit-left" :
                 slideDir === "right" ? " slide-exit-right" :
-                " slide-enter"
-              }`}
+                  " slide-enter"
+                }`}
             >
               <Image
                 src={p(dish.plate - 1)}
@@ -217,22 +216,25 @@ export default function MenuShowcase() {
 
           {/* Right: Info */}
           {/* animKey changes on every nav → text fades up */}
-          <div key={animKey} className="menu-info-side menu-info-fadein">
-            {dish.tag && (
-              <span
-                className="menu-tag-badge"
-                style={{ background: tagColors[dish.tag] ?? "var(--green-mid)" }}
-              >
-                {dish.tag}
-              </span>
-            )}
-            <p className="menu-cat-eyebrow">{cat.emoji} {cat.label}</p>
-            <h3 className="menu-item-name">{dish.name}</h3>
-            {dish.desc && <p className="menu-item-sub">{dish.desc}</p>}
-            <div className="menu-price-row">
-              <span className="menu-price">{dish.price}</span>
+          <div className="menu-info-side menu-info-fadein">
+            <div key={animKey} >
+              {dish.tag ? (
+                <span
+                  className="menu-tag-badge"
+                  style={{ background: tagColors[dish.tag] ?? "var(--green-mid)" }}
+                >
+                  {dish.tag}
+                </span>
+              ) : (
+                <span className="menu-tag-badge"></span>
+              )}
+              <p className="menu-cat-eyebrow">{cat.emoji} {cat.label}</p>
+              <h3 className="menu-item-name">{dish.name}</h3>
+              {dish.desc && <p className="menu-item-sub">{dish.desc}</p>}
+              <div className="menu-price-row">
+                <span className="menu-price">{dish.price}</span>
+              </div>
             </div>
-
             {/* Nav */}
             <div className="menu-nav">
               <button
