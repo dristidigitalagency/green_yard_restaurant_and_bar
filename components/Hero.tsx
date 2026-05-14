@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 
 export default function Hero() {
   return (
@@ -17,7 +17,7 @@ export default function Hero() {
       }}
     >
       {/* Background photo */}
-      <Image
+      <ExportedImage
         // src="/hero.png"
         // src="/images/building.jpg"
         src="/images/teej.jpg"

@@ -1,0 +1,39 @@
+[debug] [2026-05-14T17:24:31.534Z] ----------------------------------------------------------------------
+[debug] [2026-05-14T17:24:31.537Z] Command:       C:\nvm\nodejs\node.exe C:\nvm\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2026-05-14T17:24:31.538Z] CLI Version:   15.14.0
+[debug] [2026-05-14T17:24:31.538Z] Platform:      win32
+[debug] [2026-05-14T17:24:31.538Z] Node Version:  v20.9.0
+[debug] [2026-05-14T17:24:31.538Z] Time:          Thu May 14 2026 23:09:31 GMT+0545 (Nepal Time)
+[debug] [2026-05-14T17:24:31.538Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-05-14T17:24:31.540Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-05-14T17:25:15.432Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-05-14T17:25:15.432Z] > authorizing via signed-in user (yadavrahulkumar91@gmail.com)
+[debug] [2026-05-14T17:25:15.433Z] [iam] checking project gamechanger-f5da7 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-05-14T17:25:15.433Z] No OAuth tokens found
+[debug] [2026-05-14T17:25:15.434Z] No OAuth tokens found
+[debug] [2026-05-14T17:25:15.434Z] > refreshing access token with scopes: []
+[debug] [2026-05-14T17:25:15.435Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-05-14T17:25:15.435Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-05-14T17:25:15.659Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-05-14T17:25:15.660Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-05-14T17:25:15.664Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/gamechanger-f5da7:testIamPermissions [none]
+[debug] [2026-05-14T17:25:15.664Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/gamechanger-f5da7:testIamPermissions  x-goog-user-project=gamechanger-f5da7
+[debug] [2026-05-14T17:25:15.665Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/gamechanger-f5da7:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-05-14T17:25:16.144Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-05-14T17:25:16.144Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-05-14T17:25:17.236Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/gamechanger-f5da7:testIamPermissions 200
+[debug] [2026-05-14T17:25:17.236Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/gamechanger-f5da7:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-05-14T17:25:17.237Z] Checked if tokens are valid: true, expires at: 1778783114660
+[debug] [2026-05-14T17:25:17.238Z] Checked if tokens are valid: true, expires at: 1778783114660
+[debug] [2026-05-14T17:25:17.238Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/gamechanger-f5da7 [none]
+[debug] [2026-05-14T17:25:17.749Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/gamechanger-f5da7 200
+[debug] [2026-05-14T17:25:17.750Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/gamechanger-f5da7 {"projectId":"gamechanger-f5da7","projectNumber":"358268649157","displayName":"GameChanger","name":"projects/gamechanger-f5da7","resources":{"hostingSite":"gamechanger-f5da7","realtimeDatabaseInstance":"gamechanger-f5da7-default-rtdb","locationId":"us-central"},"state":"ACTIVE","etag":"1_c2165ade-802e-41c5-8cce-9c9d87cc1285"}
+[info] 
+[info] === Deploying to 'gamechanger-f5da7'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2026-05-14T17:25:17.758Z] Checked if tokens are valid: true, expires at: 1778783114660
+[debug] [2026-05-14T17:25:17.758Z] Checked if tokens are valid: true, expires at: 1778783114660
+[debug] [2026-05-14T17:25:17.758Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/greenyardrestaurant/versions [none]
+[debug] [2026-05-14T17:25:17.758Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/greenyardrestaurant/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}

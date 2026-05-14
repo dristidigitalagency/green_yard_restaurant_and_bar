@@ -1,6 +1,6 @@
 "use client";
 import { useState, useCallback, useEffect } from "react";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,71 +9,71 @@ import Footer from "@/components/Footer";
 // Images from public/images/gallery
 const GALLERY_IMAGES = [
   // Occasions & Events
-  { src: "/images/gallery/audience-watching-at-occassion.jpeg",    alt: "Audience at an occasion",              category: "Events"      },
-  { src: "/images/gallery/stage-decorated-in-some-occassion.jpeg", alt: "Decorated stage at an occasion",       category: "Events"      },
-  { src: "/images/gallery/family-and-relative-eating-in-occassion.jpeg", alt: "Family eating at occasion",      category: "Events"      },
-  { src: "/images/gallery/girls-dancing-at-night.jpeg",            alt: "Girls dancing at night event",         category: "Events"      },
-  { src: "/images/gallery/customer-eating-in-party-at-night.jpeg", alt: "Customer dining at a night party",     category: "Events"      },
+  { src: "/images/gallery/audience-watching-at-occassion.jpeg", alt: "Audience at an occasion", category: "Events" },
+  { src: "/images/gallery/stage-decorated-in-some-occassion.jpeg", alt: "Decorated stage at an occasion", category: "Events" },
+  { src: "/images/gallery/family-and-relative-eating-in-occassion.jpeg", alt: "Family eating at occasion", category: "Events" },
+  { src: "/images/gallery/girls-dancing-at-night.jpeg", alt: "Girls dancing at night event", category: "Events" },
+  { src: "/images/gallery/customer-eating-in-party-at-night.jpeg", alt: "Customer dining at a night party", category: "Events" },
 
   // Teej Special
-  { src: "/images/gallery/teej-group-sitting-photo.jpeg",          alt: "Teej group sitting photo",             category: "Teej"        },
-  { src: "/images/gallery/women-in-teej-group-photo.jpeg",         alt: "Women in Teej group photo",            category: "Teej"        },
-  { src: "/images/gallery/women-eating-in-row-in-teej.jpeg",       alt: "Women eating in a row at Teej",        category: "Teej"        },
+  { src: "/images/gallery/teej-group-sitting-photo.jpeg", alt: "Teej group sitting photo", category: "Teej" },
+  { src: "/images/gallery/women-in-teej-group-photo.jpeg", alt: "Women in Teej group photo", category: "Teej" },
+  { src: "/images/gallery/women-eating-in-row-in-teej.jpeg", alt: "Women eating in a row at Teej", category: "Teej" },
 
   // Birthdays
-  { src: "/images/gallery/birthday-decoration.jpeg",               alt: "Birthday decoration setup",            category: "Birthdays"   },
-  { src: "/images/gallery/birthday-decoration1.jpeg",              alt: "Birthday decoration 2",                category: "Birthdays"   },
-  { src: "/images/gallery/birthday-decoration2.jpeg",              alt: "Birthday decoration 3",                category: "Birthdays"   },
-  { src: "/images/gallery/birthday-girls-group-photo.jpeg",        alt: "Birthday girls group photo",           category: "Birthdays"   },
+  { src: "/images/gallery/birthday-decoration.jpeg", alt: "Birthday decoration setup", category: "Birthdays" },
+  { src: "/images/gallery/birthday-decoration1.jpeg", alt: "Birthday decoration 2", category: "Birthdays" },
+  { src: "/images/gallery/birthday-decoration2.jpeg", alt: "Birthday decoration 3", category: "Birthdays" },
+  { src: "/images/gallery/birthday-girls-group-photo.jpeg", alt: "Birthday girls group photo", category: "Birthdays" },
 
   // Baby & Birth Ceremonies
-  { src: "/images/gallery/baby-birthceremonial.jpeg",              alt: "Baby birth ceremony",                  category: "Ceremonies"  },
-  { src: "/images/gallery/baby-shower-baloon-deocation.jpeg",      alt: "Baby shower balloon decoration",       category: "Ceremonies"  },
-  { src: "/images/gallery/birth-ceremonial-baby-photo-with-mother.jpeg", alt: "Baby with mother at ceremony",   category: "Ceremonies"  },
+  { src: "/images/gallery/baby-birthceremonial.jpeg", alt: "Baby birth ceremony", category: "Ceremonies" },
+  { src: "/images/gallery/baby-shower-baloon-deocation.jpeg", alt: "Baby shower balloon decoration", category: "Ceremonies" },
+  { src: "/images/gallery/birth-ceremonial-baby-photo-with-mother.jpeg", alt: "Baby with mother at ceremony", category: "Ceremonies" },
   { src: "/images/gallery/birth-ceremonial-baby-photo-with-mother-and-relative-wider-view.jpeg", alt: "Baby ceremony wide shot", category: "Ceremonies" },
-  { src: "/images/gallery/birth-ceremonial-baby-photo-with-mother_and_relative.jpeg", alt: "Baby with family",  category: "Ceremonies"  },
+  { src: "/images/gallery/birth-ceremonial-baby-photo-with-mother_and_relative.jpeg", alt: "Baby with family", category: "Ceremonies" },
 
   // Food & Dining
-  { src: "/images/gallery/breakfast-plate.jpeg",                   alt: "Breakfast plate",                      category: "Food"        },
-  { src: "/images/gallery/customers-eating.mp4",                   alt: "Customers eating",                     category: "Food",        isVideo: true },
-  { src: "/images/gallery/customers-self-service-in-line.jpeg",    alt: "Customers in self-service line",       category: "Food"        },
-  { src: "/images/gallery/customers-self-service-in-line1.jpeg",   alt: "Customers self-service 2",             category: "Food"        },
+  { src: "/images/gallery/breakfast-plate.jpeg", alt: "Breakfast plate", category: "Food" },
+  { src: "/images/gallery/customers-eating.mp4", alt: "Customers eating", category: "Food", isVideo: true },
+  { src: "/images/gallery/customers-self-service-in-line.jpeg", alt: "Customers in self-service line", category: "Food" },
+  { src: "/images/gallery/customers-self-service-in-line1.jpeg", alt: "Customers self-service 2", category: "Food" },
   { src: "/images/gallery/customers-eating-at-night-in-beautiful-greenary-environment.jpeg", alt: "Dining at night in greenery", category: "Food" },
 
   // Venue & Ambiance
-  { src: "/images/gallery/restaurant-decorated.jpeg",              alt: "Decorated restaurant interior",        category: "Venue"       },
-  { src: "/images/gallery/restaurant-night-view.jpeg",             alt: "Restaurant at night",                  category: "Venue"       },
-  { src: "/images/gallery/restaurent-room.jpeg",                   alt: "Restaurant indoor room",               category: "Venue"       },
-  { src: "/images/gallery/bars-decorated-at-restaurant.jpeg",      alt: "Decorated bar at the restaurant",      category: "Venue"       },
-  { src: "/images/gallery/baloon-decoration.jpeg",                 alt: "Balloon decoration",                   category: "Venue"       },
-  { src: "/images/gallery/veranda.jpeg",                           alt: "Restaurant veranda",                   category: "Venue"       },
-  { src: "/images/gallery/garden-and-building.jpeg",               alt: "Garden and building exterior",         category: "Venue"       },
+  { src: "/images/gallery/restaurant-decorated.jpeg", alt: "Decorated restaurant interior", category: "Venue" },
+  { src: "/images/gallery/restaurant-night-view.jpeg", alt: "Restaurant at night", category: "Venue" },
+  { src: "/images/gallery/restaurent-room.jpeg", alt: "Restaurant indoor room", category: "Venue" },
+  { src: "/images/gallery/bars-decorated-at-restaurant.jpeg", alt: "Decorated bar at the restaurant", category: "Venue" },
+  { src: "/images/gallery/baloon-decoration.jpeg", alt: "Balloon decoration", category: "Venue" },
+  { src: "/images/gallery/veranda.jpeg", alt: "Restaurant veranda", category: "Venue" },
+  { src: "/images/gallery/garden-and-building.jpeg", alt: "Garden and building exterior", category: "Venue" },
 
   // Garden & Nature
-  { src: "/images/gallery/flower.jpeg",                            alt: "Beautiful flower in garden",           category: "Garden"      },
-  { src: "/images/gallery/garden-flower.jpeg",                     alt: "Garden flowers",                       category: "Garden"      },
-  { src: "/images/gallery/garden-flower.mp4",                      alt: "Garden flowers video",                 category: "Garden",     isVideo: true },
-  { src: "/images/gallery/customers-warmin-with-night-fire.jpeg",  alt: "Guests warming by night fire",         category: "Garden"      },
+  { src: "/images/gallery/flower.jpeg", alt: "Beautiful flower in garden", category: "Garden" },
+  { src: "/images/gallery/garden-flower.jpeg", alt: "Garden flowers", category: "Garden" },
+  { src: "/images/gallery/garden-flower.mp4", alt: "Garden flowers video", category: "Garden", isVideo: true },
+  { src: "/images/gallery/customers-warmin-with-night-fire.jpeg", alt: "Guests warming by night fire", category: "Garden" },
 
   // People & Groups
-  { src: "/images/gallery/group-photo-infront-of-restaurant.jpeg", alt: "Group photo in front of restaurant",  category: "People"      },
-  { src: "/images/gallery/young-girls-group-photo.jpeg",           alt: "Young girls group photo",              category: "People"      },
-  { src: "/images/gallery/children-group-photo.jpeg",              alt: "Children group photo",                 category: "People"      },
-  { src: "/images/gallery/children-group-photo1.jpeg",             alt: "Children group photo 2",               category: "People"      },
-  { src: "/images/gallery/women-photoshooting-in-front-of-building.jpeg", alt: "Women photoshooting outside",  category: "People"      },
+  { src: "/images/gallery/group-photo-infront-of-restaurant.jpeg", alt: "Group photo in front of restaurant", category: "People" },
+  { src: "/images/gallery/young-girls-group-photo.jpeg", alt: "Young girls group photo", category: "People" },
+  { src: "/images/gallery/children-group-photo.jpeg", alt: "Children group photo", category: "People" },
+  { src: "/images/gallery/children-group-photo1.jpeg", alt: "Children group photo 2", category: "People" },
+  { src: "/images/gallery/women-photoshooting-in-front-of-building.jpeg", alt: "Women photoshooting outside", category: "People" },
 
   // Videos
-  { src: "/images/gallery/dancing.mp4",                            alt: "Dancing at celebration",               category: "Events",     isVideo: true },
-  { src: "/images/gallery/teej-dance.mp4",                         alt: "Teej dance performance",               category: "Teej",       isVideo: true },
-  { src: "/images/gallery/WhatsApp Video 2026-05-05 at 8.16.46 PM.mp4", alt: "Recent event highlights",        category: "Events",     isVideo: true },
+  { src: "/images/gallery/dancing.mp4", alt: "Dancing at celebration", category: "Events", isVideo: true },
+  { src: "/images/gallery/teej-dance.mp4", alt: "Teej dance performance", category: "Teej", isVideo: true },
+  { src: "/images/gallery/WhatsApp Video 2026-05-05 at 8.16.46 PM.mp4", alt: "Recent event highlights", category: "Events", isVideo: true },
 
   // WhatsApp Recent Photos
-  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.47 PM (1).jpeg", alt: "Recent event photo 1",      category: "Events"      },
-  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.47 PM.jpeg",     alt: "Recent event photo 2",      category: "Events"      },
-  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.48 PM (1).jpeg", alt: "Recent event photo 3",      category: "Events"      },
-  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.48 PM.jpeg",     alt: "Recent event photo 4",      category: "Events"      },
-  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.49 PM.jpeg",     alt: "Recent event photo 5",      category: "Events"      },
-  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.49 PM1.jpeg",    alt: "Recent event photo 6",      category: "Events"      },
+  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.47 PM (1).jpeg", alt: "Recent event photo 1", category: "Events" },
+  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.47 PM.jpeg", alt: "Recent event photo 2", category: "Events" },
+  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.48 PM (1).jpeg", alt: "Recent event photo 3", category: "Events" },
+  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.48 PM.jpeg", alt: "Recent event photo 4", category: "Events" },
+  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.49 PM.jpeg", alt: "Recent event photo 5", category: "Events" },
+  { src: "/images/gallery/WhatsApp Image 2026-05-05 at 8.16.49 PM1.jpeg", alt: "Recent event photo 6", category: "Events" },
 ];
 
 const CATEGORIES = ["All", "Events", "Teej", "Birthdays", "Ceremonies", "Food", "Venue", "Garden", "People"];
@@ -222,7 +222,7 @@ export default function GalleryPage() {
                     style={{ width: "100%", display: "block", objectFit: "cover" }}
                   />
                 ) : (
-                  <Image
+                  <ExportedImage
                     src={item.src}
                     alt={item.alt}
                     width={500}
@@ -291,7 +291,7 @@ export default function GalleryPage() {
 
           {/* Image */}
           <div onClick={e => e.stopPropagation()} style={{ maxWidth: "90vw", maxHeight: "88vh", borderRadius: "16px", overflow: "hidden", boxShadow: "0 32px 100px rgba(0,0,0,0.8)" }}>
-            <Image
+            <ExportedImage
               src={currentItem.src}
               alt={currentItem.alt}
               width={1200}

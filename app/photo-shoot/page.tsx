@@ -1,6 +1,6 @@
 "use client";
 import { useState, useCallback, useEffect } from "react";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,28 +8,28 @@ import { photoShootSessions, type PhotoShootSession } from "@/data/photoshoot-da
 
 // ─── Occasion colour mapping ───────────────────────────────────────────────────
 const OCCASION_COLORS: Record<string, string> = {
-  "Teej Celebration":       "#c9485b",
-  "Private Gathering":      "#5b8fa8",
-  "Birthday Celebration":   "#e8a838",
-  "Anniversary Dinner":     "#9b59b6",
-  "Corporate Lunch":        "#2ecc71",
-  "Engagement Party":       "#e8567a",
-  "Baby Shower":            "#f39c12",
-  "Weekend Brunch":         "#52b788",
-  "Family Day Out":         "#27ae60",
+  "Teej Celebration": "#c9485b",
+  "Private Gathering": "#5b8fa8",
+  "Birthday Celebration": "#e8a838",
+  "Anniversary Dinner": "#9b59b6",
+  "Corporate Lunch": "#2ecc71",
+  "Engagement Party": "#e8567a",
+  "Baby Shower": "#f39c12",
+  "Weekend Brunch": "#52b788",
+  "Family Day Out": "#27ae60",
   "Professional Photo Shoot": "#c9a84c",
 };
 
 const OCCASION_ICONS: Record<string, string> = {
-  "Teej Celebration":       "🪷",
-  "Private Gathering":      "🍽️",
-  "Birthday Celebration":   "🎂",
-  "Anniversary Dinner":     "💑",
-  "Corporate Lunch":        "💼",
-  "Engagement Party":       "💍",
-  "Baby Shower":            "🍼",
-  "Weekend Brunch":         "☀️",
-  "Family Day Out":         "👨‍👩‍👧‍👦",
+  "Teej Celebration": "🪷",
+  "Private Gathering": "🍽️",
+  "Birthday Celebration": "🎂",
+  "Anniversary Dinner": "💑",
+  "Corporate Lunch": "💼",
+  "Engagement Party": "💍",
+  "Baby Shower": "🍼",
+  "Weekend Brunch": "☀️",
+  "Family Day Out": "👨‍👩‍👧‍👦",
   "Professional Photo Shoot": "📸",
 };
 
@@ -135,7 +135,7 @@ export default function PhotoShootPage() {
             {sessions.map((session, sIdx) => {
               const isLeft = sIdx % 2 === 0;
               const color = OCCASION_COLORS[session.occasion] ?? "#52b788";
-              const icon  = OCCASION_ICONS[session.occasion]  ?? "📷";
+              const icon = OCCASION_ICONS[session.occasion] ?? "📷";
               const isExpanded = activeSessionId === session.id;
 
               return (
@@ -193,7 +193,7 @@ export default function PhotoShootPage() {
                       }}
                     >
                       <div style={{ position: "relative", height: "240px", overflow: "hidden" }}>
-                        <Image
+                        <ExportedImage
                           src={session.coverImage}
                           alt={session.occasion}
                           fill
@@ -280,7 +280,7 @@ export default function PhotoShootPage() {
                                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
                               }}
                             >
-                              <Image
+                              <ExportedImage
                                 src={img.src}
                                 alt={img.alt}
                                 fill
@@ -356,7 +356,7 @@ export default function PhotoShootPage() {
           <button onClick={e => { e.stopPropagation(); goPrev(); }} style={{ position: "absolute", left: "1rem", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "white", borderRadius: "50%", width: "48px", height: "48px", fontSize: "1.5rem", cursor: "pointer", zIndex: 10 }}>‹</button>
 
           <div onClick={e => e.stopPropagation()} style={{ maxWidth: "90vw", maxHeight: "88vh", borderRadius: "16px", overflow: "hidden", boxShadow: "0 32px 100px rgba(0,0,0,0.85)" }}>
-            <Image
+            <ExportedImage
               src={lightboxSession.images[lightboxIndex].src}
               alt={lightboxSession.images[lightboxIndex].alt}
               width={1200}

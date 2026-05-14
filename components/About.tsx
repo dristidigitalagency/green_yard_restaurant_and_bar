@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import { useEffect, useRef, useState } from "react";
 
 const features = [
@@ -174,7 +174,7 @@ export default function About() {
               aspectRatio: "4/5",
             }}
           >
-            <Image
+            <ExportedImage
               src="/images/building.jpg"
               alt="Green Yard garden restaurant interior"
               fill
@@ -271,7 +271,7 @@ export default function About() {
           <div className={`occasion-content${animating ? " fading" : ""}`}>
             {/* Image */}
             <div className="occasion-image-wrap">
-              <Image
+              <ExportedImage
                 src={current.image}
                 alt={current.label}
                 fill

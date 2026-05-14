@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 
 const navLinks = [
   { label: "About", href: "/#about" },
@@ -93,7 +93,7 @@ export default function Header() {
           }}
         >
           <div className="flex gap-1">
-            <Image src="/logo.png" alt="Logo" width={35} height={35} />
+            <ExportedImage src="/logo.png" alt="Logo" width={35} height={35} />
             <div>
 
               <div

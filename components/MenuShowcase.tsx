@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useCallback } from "react";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 
 type MenuItem = {
   name: string;
@@ -200,7 +200,7 @@ export default function MenuShowcase() {
                     " slide-enter"
                   }`}
               >
-                <Image
+                <ExportedImage
                   src={p(dish.plate - 1)}
                   alt={dish.name}
                   fill
@@ -282,7 +282,7 @@ export default function MenuShowcase() {
               onClick={() => pickItem(i)}
             >
               <div className="mgc-thumb">
-                <Image src={p(item.plate - 1)} alt={item.name} fill style={{ objectFit: "cover" }} sizes="52px" />
+                <ExportedImage src={p(item.plate - 1)} alt={item.name} fill style={{ objectFit: "cover" }} sizes="52px" />
               </div>
               <div className="mgc-body">
                 <span className="mgc-name">{item.name}</span>
