@@ -20,6 +20,21 @@ type Category = {
 
 const PLATES = 5;
 const p = (i: number) => `/images/menu/plate${((i % PLATES) + PLATES) % PLATES + 1}.png`;
+const beverageCategoryIds = new Set([
+  "hot-beverage",
+  "cold-beverage",
+  "refreshers",
+  "smoothies-shakes",
+  "juices-tea",
+  "whiskey",
+  "vodka-gin-rum-tequila",
+  "wine",
+  "domestic-liquor",
+  "liquor-shots-beer",
+  "cocktails",
+  "mocktails",
+  "basics",
+]);
 const getMenuImage = (item: MenuItem) =>
   item.image
     ? { src: item.image, isFallback: false }
@@ -531,6 +546,7 @@ export default function MenuShowcase() {
   const cat = categories[catIdx];
   const dish = cat.items[itemIdx];
   const dishImage = getMenuImage(dish);
+  const shouldContainImage = beverageCategoryIds.has(cat.id) && !dishImage.isFallback;
 
   const go = useCallback((nextCat: number, nextItem: number, dir: SlideDir) => {
     if (busyRef.current) return;
@@ -605,13 +621,13 @@ export default function MenuShowcase() {
                 className={`menu-plate-circle${slideDir === "left" ? " slide-exit-left" :
                   slideDir === "right" ? " slide-exit-right" :
                     " slide-enter"
-                  }`}
+                  }${shouldContainImage ? " menu-bottle-frame" : ""}`}
               >
                 <ExportedImage
                   src={dishImage.src}
                   alt={dish.name}
                   fill
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: shouldContainImage ? "contain" : "cover" }}
                   sizes="300px"
                   priority={catIdx === 0 && itemIdx === 0}
                 />
@@ -684,6 +700,7 @@ export default function MenuShowcase() {
         <div className="menu-grid">
           {cat.items.map((item, i) => {
             const itemImage = getMenuImage(item);
+            const shouldContainThumb = beverageCategoryIds.has(cat.id) && !itemImage.isFallback;
 
             return (
               <button
@@ -691,8 +708,8 @@ export default function MenuShowcase() {
                 className={`menu-grid-card${i === itemIdx ? " active" : ""}`}
                 onClick={() => pickItem(i)}
               >
-                <div className="mgc-thumb">
-                  <ExportedImage src={itemImage.src} alt={item.name} fill style={{ objectFit: "cover" }} sizes="52px" />
+                <div className={`mgc-thumb${shouldContainThumb ? " menu-bottle-thumb" : ""}`}>
+                  <ExportedImage src={itemImage.src} alt={item.name} fill style={{ objectFit: shouldContainThumb ? "contain" : "cover" }} sizes="52px" />
                 </div>
                 <div className="mgc-body">
                   <span className="mgc-name">{item.name}</span>
