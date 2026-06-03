@@ -1,7 +1,45 @@
 "use client";
+import { useEffect, useState } from "react";
 import ExportedImage from "next-image-export-optimizer";
 
+const heroSlides = [
+  {
+    src: "/images/teej.jpg",
+    alt: "Guests celebrating in the Green Yard garden",
+    position: "center",
+  },
+  {
+    src: "/images/garden.jpeg",
+    alt: "Green Yard rooftop open space seating",
+    position: "center 40%",
+  },
+  {
+    src: "/images/building.jpg",
+    alt: "Green Yard rooftop and open space exterior",
+    position: "center",
+  },
+  {
+    src: "/images/waiter_fire.jpg",
+    alt: "Live fire service in the Green Yard garden",
+    position: "center",
+  },
+];
+
 export default function Hero() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 5500);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const goToSlide = (index: number) => {
+    setActiveSlide((index + heroSlides.length) % heroSlides.length);
+  };
+
   return (
     <section
       id="hero"
@@ -16,17 +54,35 @@ export default function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* Background photo */}
-      <ExportedImage
-        // src="/hero.png"
-        // src="/images/building.jpg"
-        src="/images/teej.jpg"
-        alt="Green Yard Restaurant outdoor garden"
-        fill
-        priority
-        style={{ objectFit: "cover", objectPosition: "center" }}
-        className="zoom-out"
-      />
+      {/* Background carousel */}
+      <div style={{ position: "absolute", inset: 0 }}>
+        {heroSlides.map((slide, index) => {
+          const isActive = index === activeSlide;
+
+          return (
+            <div
+              key={slide.src}
+              aria-hidden={!isActive}
+              style={{
+                position: "absolute",
+                inset: 0,
+                opacity: isActive ? 1 : 0,
+                transform: isActive ? "scale(1)" : "scale(1.04)",
+                transition: "opacity 900ms ease, transform 6500ms ease",
+              }}
+            >
+              <ExportedImage
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                style={{ objectFit: "cover", objectPosition: slide.position }}
+              />
+            </div>
+          );
+        })}
+      </div>
 
       {/* Dark gradient overlay */}
       <div
@@ -37,6 +93,58 @@ export default function Hero() {
             "linear-gradient(to bottom, rgba(10,30,12,0.45) 0%, rgba(10,30,12,0.2) 40%, rgba(10,30,12,0.7) 100%)",
         }}
       />
+
+      {/* Carousel controls */}
+      <button
+        type="button"
+        aria-label="Previous hero image"
+        onClick={() => goToSlide(activeSlide - 1)}
+        style={{
+          position: "absolute",
+          left: "clamp(1rem, 3vw, 2rem)",
+          top: "50%",
+          transform: "translateY(-50%)",
+          zIndex: 3,
+          width: "44px",
+          height: "44px",
+          borderRadius: "50%",
+          border: "1px solid rgba(255,255,255,0.38)",
+          background: "rgba(10,30,12,0.28)",
+          color: "white",
+          fontSize: "1.35rem",
+          cursor: "pointer",
+          backdropFilter: "blur(10px)",
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        ‹
+      </button>
+      <button
+        type="button"
+        aria-label="Next hero image"
+        onClick={() => goToSlide(activeSlide + 1)}
+        style={{
+          position: "absolute",
+          right: "clamp(1rem, 3vw, 2rem)",
+          top: "50%",
+          transform: "translateY(-50%)",
+          zIndex: 3,
+          width: "44px",
+          height: "44px",
+          borderRadius: "50%",
+          border: "1px solid rgba(255,255,255,0.38)",
+          background: "rgba(10,30,12,0.28)",
+          color: "white",
+          fontSize: "1.35rem",
+          cursor: "pointer",
+          backdropFilter: "blur(10px)",
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        ›
+      </button>
 
       {/* Floating leaf particles */}
       {[
@@ -138,6 +246,38 @@ export default function Hero() {
             View Our Menu
           </a>
         </div>
+      </div>
+
+      <div
+        aria-label="Hero image carousel"
+        style={{
+          position: "absolute",
+          bottom: "5rem",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 3,
+          display: "flex",
+          gap: "0.55rem",
+        }}
+      >
+        {heroSlides.map((slide, index) => (
+          <button
+            key={slide.src}
+            type="button"
+            aria-label={`Show slide ${index + 1}`}
+            aria-current={index === activeSlide}
+            onClick={() => goToSlide(index)}
+            style={{
+              width: index === activeSlide ? "28px" : "9px",
+              height: "9px",
+              borderRadius: "999px",
+              border: "1px solid rgba(255,255,255,0.65)",
+              background: index === activeSlide ? "var(--gold-light)" : "rgba(255,255,255,0.38)",
+              cursor: "pointer",
+              transition: "width 220ms ease, background 220ms ease",
+            }}
+          />
+        ))}
       </div>
 
       {/* Scroll arrow */}
