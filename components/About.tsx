@@ -4,11 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 const features = [
   { icon: "🌿", label: "Open Garden Dining" },
+  { icon: "🌄", label: "Rooftop Space Available" },
+  { icon: "☕", label: "Coffee & Healthy Breakfast" },
+  { icon: "🍽️", label: "National & International Cuisine" },
+  { icon: "🔥", label: "Live Coal Sekuwa" },
   { icon: "🎵", label: "Live Music Evenings" },
-  { icon: "🍃", label: "Fresh Organic Ingredients" },
-  { icon: "🔥", label: "Bonfire Nights" },
   { icon: "🅿️", label: "Ample Parking" },
-  { icon: "🌄", label: "Mountain Views" },
 ];
 
 const occasions = [
@@ -113,7 +114,7 @@ export default function About() {
               marginBottom: "1.25rem",
             }}
           >
-            Nestled in the heart of Kathmandu, Green Yard is more than a restaurant — it&apos;s a living sanctuary where nature welcomes you with open arms. Every corner is a canvas of lush greenery, wooden warmth, and gentle breezes.
+            Nestled in the heart of Kathmandu, Green Yard is more than a restaurant — it&apos;s a living sanctuary where nature welcomes you with open arms. Every corner is a canvas of open space, lush greenery, rooftop seating, and gentle breezes.
           </p>
           <p
             style={{
@@ -124,7 +125,7 @@ export default function About() {
               marginBottom: "2rem",
             }}
           >
-            From contemplative morning coffee to vibrant evening cocktails beneath the stars — with crackling bonfires and soulful live music — we&apos;ve crafted the perfect setting for every mood and every milestone.
+            From gym-friendly coffee and healthy breakfast to vibrant evening cocktails beneath the stars, our national and international multi-cuisine kitchen brings together Newari favourites, Italian bites, live coal sekuwa, and local flavours for every mood and milestone.
           </p>
 
           {/* Feature pills */}

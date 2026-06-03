@@ -45,10 +45,11 @@ export default function PhotoShootPage() {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
+  const hasLightbox = lightboxSession !== null;
+
   const openLightbox = (session: PhotoShootSession, idx: number) => {
     setLightboxSession(session);
     setLightboxIndex(idx);
-    document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = useCallback(() => {
@@ -56,7 +57,6 @@ export default function PhotoShootPage() {
     setTimeout(() => {
       setLightboxSession(null);
       setLbClosing(false);
-      document.body.style.overflow = "";
     }, 250);
   }, []);
 
@@ -79,6 +79,17 @@ export default function PhotoShootPage() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [closeLightbox, goNext, goPrev]);
+
+  useEffect(() => {
+    if (!hasLightbox) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [hasLightbox]);
 
   return (
     <>
@@ -132,8 +143,7 @@ export default function PhotoShootPage() {
               display: "none", // hidden on small screens via CSS
             }} className="timeline-spine" />
 
-            {sessions.map((session, sIdx) => {
-              const isLeft = sIdx % 2 === 0;
+            {sessions.map((session) => {
               const color = OCCASION_COLORS[session.occasion] ?? "#52b788";
               const icon = OCCASION_ICONS[session.occasion] ?? "📷";
               const isExpanded = activeSessionId === session.id;
@@ -329,7 +339,7 @@ export default function PhotoShootPage() {
           <p style={{ fontFamily: "'Great Vibes', cursive", color: "var(--gold)", fontSize: "1.8rem", marginBottom: "0.5rem" }}>Be Part of the Story</p>
           <h2 style={{ fontFamily: "'Playfair Display', serif", color: "white", fontSize: "clamp(1.8rem,4vw,2.8rem)", marginBottom: "1rem" }}>Book Your Celebration</h2>
           <p style={{ fontFamily: "'Lato', sans-serif", color: "rgba(183,228,199,0.7)", maxWidth: "480px", margin: "0 auto 2rem", lineHeight: 1.8 }}>
-            Whether it's a birthday, anniversary, corporate event or just a beautiful day out — Green Yard is ready to make it unforgettable.
+            Whether it&apos;s a birthday, anniversary, corporate event or just a beautiful day out — Green Yard is ready to make it unforgettable.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/#booking" className="btn-primary">📅 Book a Table</Link>

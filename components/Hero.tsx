@@ -118,7 +118,7 @@ export default function Hero() {
             textShadow: "0 1px 8px rgba(0,0,0,0.4)",
           }}
         >
-          Kathmandu&apos;s most peaceful garden escape — lush greenery, soul-warming cuisine &amp; the perfect setting for every occasion.
+          Kathmandu&apos;s peaceful garden and rooftop escape — open greenery, multi-cuisine flavours &amp; the perfect setting for every occasion.
         </p>
 
         {/* CTAs */}

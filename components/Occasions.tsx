@@ -29,7 +29,7 @@ const occasions = [
     id: "meetings",
     emoji: "🤝",
     title: "Corporate Meetings",
-    desc: "Fresh air, green surroundings and excellent service — the ideal backdrop for productive gatherings.",
+    desc: "Fresh air, open garden seating, rooftop space and excellent service — the ideal backdrop for productive gatherings.",
   },
   {
     id: "anniversary",
@@ -105,7 +105,7 @@ export default function Occasions() {
               lineHeight: 1.7,
             }}
           >
-            Kathmandu&apos;s most peaceful retreat — the green yard that turns gatherings into lasting memories.
+            Kathmandu&apos;s most peaceful open-air retreat — garden greenery, rooftop space and great food that turn gatherings into lasting memories.
           </p>
         </div>
 

@@ -70,7 +70,7 @@ export default function Footer() {
                 maxWidth: "240px",
               }}
             >
-              Kathmandu&apos;s most peaceful garden dining experience — where every meal becomes a memory.
+              Kathmandu&apos;s peaceful open garden and rooftop dining experience — where every multi-cuisine meal becomes a memory.
             </p>
           </div>
 

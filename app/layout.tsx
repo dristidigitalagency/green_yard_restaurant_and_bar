@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Green Yard Restaurant & Bar | Nature-Immersed Dining in Kathmandu",
+  title: "Green Yard Restaurant & Bar | Open Garden & Rooftop Dining in Kathmandu",
   description:
-    "Discover Green Yard — Kathmandu's most peaceful garden restaurant and bar. Lush greenery, exceptional cuisine, and the perfect venue for every celebration. Birthday parties, Teej, engagements, anniversaries & more.",
+    "Discover Green Yard — Kathmandu's peaceful open garden and rooftop restaurant and bar. Enjoy lush greenery, healthy breakfast, coffee, live-coal sekuwa, Newari favourites, Italian bites, and national and international multi-cuisine.",
   keywords: [
     "Green Yard Restaurant",
     "garden restaurant Kathmandu",
@@ -14,11 +14,16 @@ export const metadata: Metadata = {
     "engagement venue Nepal",
     "anniversary dinner Kathmandu",
     "nature restaurant KTM",
+    "rooftop restaurant Kathmandu",
+    "multi cuisine restaurant Kathmandu",
+    "healthy breakfast Kathmandu",
+    "sekuwa restaurant Bhaktapur",
+    "Newari food Kathmandu",
   ],
   openGraph: {
     title: "Green Yard Restaurant & Bar",
     description:
-      "Where Nature Meets Flavour — Lush gardens, soul-warming food & celebrations under the open sky.",
+      "Where Nature Meets Flavour — open garden and rooftop dining, multi-cuisine food and celebrations under the open sky.",
     type: "website",
     locale: "en_US",
   },

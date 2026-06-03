@@ -43,7 +43,7 @@ const getMenuImage = (item: MenuItem) =>
 const categories: Category[] = [
   {
     id: "breakfast",
-    label: "Breakfast",
+    label: "Coffee & Healthy Breakfast",
     emoji: "🍳",
     items: [
       { name: "Choice of Egg", desc: "Plain Omelet / Masala Omelet / Poached / Scrambled / Fried Egg", price: "NPR 180", plate: 1 },
@@ -91,12 +91,12 @@ const categories: Category[] = [
 
   {
     id: "asian-non-veg",
-    label: "Asian Selection Non-Veg",
+    label: "Asian & Newari Non-Veg",
     emoji: "🍗",
     items: [
       { name: "Chicken Roast", desc: "Asian-style roasted chicken", price: "NPR 480", plate: 1 },
       { name: "Chicken Sadeko", desc: "Spiced Nepali-style chicken sadeko", price: "NPR 420", plate: 2 },
-      { name: "Chicken Chhoila", desc: "Traditional spicy chicken chhoila", price: "NPR 450", plate: 3 },
+      { name: "Chicken Chhoila", desc: "Traditional spicy Newari-style chicken chhoila", price: "NPR 450", plate: 3 },
       { name: "Timur Chicken", desc: "Marinated with Spice Herbs, served with Local Piseko Achhar", price: "NPR 665", tag: "Local Flavor", plate: 4, image: "/images/menu/Timur%20chicken.png" },
       { name: "Mustang Chicken", desc: "Mustang-style spicy chicken", price: "NPR 550", plate: 5 },
       { name: "Mutton Pakku", desc: "Traditional mutton pakku", price: "NPR 800", plate: 1 },
@@ -109,13 +109,13 @@ const categories: Category[] = [
 
   {
     id: "asian-veg",
-    label: "Asian Selection Veg",
+    label: "Asian & Newari Veg",
     emoji: "🥦",
     items: [
       { name: "Masala Papad", desc: "Spiced crispy papad", price: "NPR 140", plate: 1 },
       { name: "Peanut Sadeko", desc: "Spiced peanut sadeko", price: "NPR 245", plate: 2 },
       { name: "Mustang Aloo", desc: "Mustang-style spicy potato", price: "NPR 290", tag: "Popular", plate: 3 },
-      { name: "Mushroom Chhoila", desc: "Spiced mushroom chhoila", price: "NPR 390", plate: 4, image: "/images/menu/Mushroom%20choila.png" },
+      { name: "Mushroom Chhoila", desc: "Spiced Newari-style mushroom chhoila", price: "NPR 390", plate: 4, image: "/images/menu/Mushroom%20choila.png" },
       { name: "Mushroom Chilly", desc: "Chilly-style mushroom", price: "NPR 390", plate: 5 },
       { name: "Paneer Chilly", desc: "Paneer cooked in spicy chilly sauce", price: "NPR 425", plate: 1 },
       { name: "Paneer Pakoda", desc: "Crispy fried paneer pakoda", price: "NPR 425", plate: 2 },
@@ -127,7 +127,7 @@ const categories: Category[] = [
 
   {
     id: "appetizers",
-    label: "Appetizers",
+    label: "Chilly & Chicken Specials",
     emoji: "🍟",
     items: [
       { name: "Italian Bruschetta", desc: "Mushroom, Basil Leaf, Tomato, Caramelized Onion, Olives, Capers", price: "NPR 475", plate: 1 },
@@ -147,9 +147,9 @@ const categories: Category[] = [
       { name: "Volcano Shrimps", desc: "Marinated with Tabasco Sauce, Hot Sauce & Paprika", price: "NPR 785", plate: 5 },
       { name: "Pan Sautéed Chicken", desc: "Marinated with Green Herbs Muscles with Sesame Oil", price: "NPR 650", plate: 1 },
       { name: "Boiled", desc: "Chicken / Mixed Veg", price: "NPR 390 / 325", plate: 2 },
-      { name: "Chicken Kurkure", desc: "Crunchy chicken bites", price: "NPR 480", plate: 3 },
+      { name: "Kurkure Chicken", desc: "Crunchy kurkura-style chicken bites", price: "NPR 480", tag: "Must Try", plate: 3 },
       { name: "Chicken Nuggets", desc: "Crispy chicken nuggets", price: "NPR 540", plate: 4 },
-      { name: "Chicken Manchurian", desc: "Chicken / Veg", price: "NPR 425 / 375", plate: 5 },
+      { name: "Chicken / Veg Manchurian", desc: "Manchurian-style chilly favourite", price: "NPR 425 / 375", plate: 5 },
       { name: "Dragon Chicken", desc: "Spicy dragon-style chicken", price: "NPR 550", tag: "Spicy", plate: 1 },
       { name: "Sesame Chicken", desc: "Chicken tossed with sesame flavor", price: "NPR 490", plate: 2 },
       { name: "Singapore Fish Fry", desc: "Singapore-style fried fish", price: "NPR 600", plate: 3 },
@@ -158,15 +158,15 @@ const categories: Category[] = [
 
   {
     id: "sekuwa",
-    label: "Sekuwa",
+    label: "Live Coal Sekuwa",
     emoji: "🍖",
     items: [
-      { name: "Mutton Sekuwa", desc: "Per plate", price: "NPR 650", plate: 1, image: "/images/menu/Mutton%20sekuwa.png" },
-      { name: "Chicken Sekuwa", desc: "Per plate", price: "NPR 450", plate: 2, image: "/images/menu/Chicken%20sekuwa.png" },
-      { name: "Pork Sekuwa", desc: "Per plate", price: "NPR 495", plate: 3 },
-      { name: "Mutton Sekuwa by Kg", desc: "Half kg / 1 kg", price: "NPR 1,650 / 3,190", plate: 4 },
-      { name: "Chicken Sekuwa by Kg", desc: "Half kg / 1 kg", price: "NPR 850 / 1,450", plate: 5 },
-      { name: "Pork Sekuwa by Kg", desc: "Half kg / 1 kg", price: "NPR 895 / 1,590", plate: 1 },
+      { name: "Mutton Sekuwa", desc: "Live-coal grilled, per plate", price: "NPR 650", plate: 1, image: "/images/menu/Mutton%20sekuwa.png" },
+      { name: "Chicken Sekuwa", desc: "Live-coal grilled, per plate", price: "NPR 450", plate: 2, image: "/images/menu/Chicken%20sekuwa.png" },
+      { name: "Pork Sekuwa", desc: "Live-coal grilled, per plate", price: "NPR 495", plate: 3 },
+      { name: "Mutton Sekuwa by Kg", desc: "Live-coal grilled, half kg / 1 kg", price: "NPR 1,650 / 3,190", plate: 4 },
+      { name: "Chicken Sekuwa by Kg", desc: "Live-coal grilled, half kg / 1 kg", price: "NPR 850 / 1,450", plate: 5 },
+      { name: "Pork Sekuwa by Kg", desc: "Live-coal grilled, half kg / 1 kg", price: "NPR 895 / 1,590", plate: 1 },
     ],
   },
 
@@ -275,7 +275,7 @@ const categories: Category[] = [
 
   {
     id: "pasta",
-    label: "Touch of Italian",
+    label: "Italian Specials",
     emoji: "🍝",
     items: [
       { name: "Bolognese", desc: "Spaghetti / Penne — all pasta served with Garlic Bread", price: "NPR 650", plate: 1 },
@@ -584,13 +584,13 @@ export default function MenuShowcase() {
 
         {/* Header */}
         <div className="menu-header">
-          <p className="section-subtitle" style={{ color: "var(--gold-light)" }}>Culinary Delights</p>
+          <p className="section-subtitle" style={{ color: "var(--gold-light)" }}>National & International Multi-Cuisine</p>
           <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,5vw,3.5rem)", color: "#fff", lineHeight: 1.15, marginTop: "0.25rem" }}>
-            Our Full Menu
+            Our Multi-Cuisine Menu
           </h2>
           <div style={{ width: "60px", height: "2px", background: "var(--gold)", margin: "1.25rem auto", borderRadius: "2px" }} />
           <p style={{ fontFamily: "'Lato',sans-serif", color: "rgba(183,228,199,0.75)", fontSize: "1rem" }}>
-            From garden-fresh bites to premium cocktails — every flavour, every occasion.
+            From Newari chhoila, chilly, Manchurian and live-coal sekuwa to Italian bites, healthy breakfasts, coffee and cocktails — excellent taste for every local gathering.
           </p>
         </div>
 

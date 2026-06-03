@@ -92,9 +92,10 @@ export default function GalleryPage() {
     (img) => activeCategory === "All" || img.category === activeCategory
   );
 
+  const hasLightbox = lightboxIndex !== null;
+
   const openLightbox = (idx: number) => {
     setLightboxIndex(idx);
-    document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = useCallback(() => {
@@ -102,7 +103,6 @@ export default function GalleryPage() {
     setTimeout(() => {
       setLightboxIndex(null);
       setIsClosing(false);
-      document.body.style.overflow = "";
     }, 250);
   }, []);
 
@@ -125,6 +125,17 @@ export default function GalleryPage() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [closeLightbox, goNext, goPrev]);
+
+  useEffect(() => {
+    if (!hasLightbox) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [hasLightbox]);
 
   const currentItem = lightboxIndex !== null ? filtered[lightboxIndex] : null;
 
