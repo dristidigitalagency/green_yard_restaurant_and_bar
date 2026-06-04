@@ -1,25 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
 
 const heroSlides = [
   {
-    src: "/images/teej.jpg",
+    src: "/images/homepage/teej.jpg",
     alt: "Guests celebrating in the Green Yard garden",
     position: "center",
   },
   {
-    src: "/images/garden.jpeg",
+    src: "/images/homepage/garden.jpeg",
     alt: "Green Yard rooftop open space seating",
     position: "center 40%",
   },
   {
-    src: "/images/building.jpg",
+    src: "/images/homepage/restaurant-night-view.jpeg",
     alt: "Green Yard rooftop and open space exterior",
     position: "center",
   },
   {
-    src: "/images/waiter_fire.jpg",
+    src: "/images/homepage/customers-eating-at-night-in-beautiful-greenary-environment.jpeg",
     alt: "Live fire service in the Green Yard garden",
     position: "center",
   },
@@ -177,6 +178,7 @@ export default function Hero() {
           zIndex: 2,
           textAlign: "center",
           padding: "0 1.5rem",
+          width: "100%",
           maxWidth: "780px",
         }}
       >
@@ -245,6 +247,45 @@ export default function Hero() {
           <a href="#menu" className="btn-outline">
             View Our Menu
           </a>
+        </div>
+        <div
+          className="fade-up-delay-3"
+          style={{
+            display: "flex",
+            gap: "0.75rem",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            marginTop: "0.9rem",
+          }}
+        >
+          <Link
+            href="/gallery"
+            className="btn-outline"
+            style={{
+              minWidth: "136px",
+              padding: "0.65rem 1.35rem",
+              background: "rgba(10,30,12,0.42)",
+              borderColor: "rgba(232,201,106,0.68)",
+              fontSize: "0.75rem",
+              backdropFilter: "blur(12px)",
+            }}
+          >
+            View Gallery
+          </Link>
+          <Link
+            href="/photo-shoot"
+            className="btn-outline"
+            style={{
+              minWidth: "136px",
+              padding: "0.65rem 1.35rem",
+              background: "rgba(10,30,12,0.42)",
+              borderColor: "rgba(232,201,106,0.68)",
+              fontSize: "0.75rem",
+              backdropFilter: "blur(12px)",
+            }}
+          >
+            Photo Shoots
+          </Link>
         </div>
       </div>
 
