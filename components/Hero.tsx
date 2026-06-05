@@ -24,6 +24,31 @@ const heroSlides = [
     alt: "Live fire service in the Green Yard garden",
     position: "center",
   },
+  {
+    src: "/images/homepage/comfortable-seats.jpeg",
+    alt: "Comfortable lounge seating at Green Yard",
+    position: "center",
+  },
+  {
+    src: "/images/homepage/garden-seats1.jpeg",
+    alt: "Garden seating surrounded by greenery",
+    position: "center",
+  },
+  {
+    src: "/images/homepage/garden1.jpeg",
+    alt: "Green Yard garden dining area",
+    position: "center",
+  },
+  {
+    src: "/images/homepage/ground-flour.jpeg",
+    alt: "Ground floor dining space at Green Yard",
+    position: "center",
+  },
+  {
+    src: "/images/homepage/upper-flour.jpeg",
+    alt: "Upper floor dining space at Green Yard",
+    position: "center",
+  },
 ];
 
 export default function Hero() {
